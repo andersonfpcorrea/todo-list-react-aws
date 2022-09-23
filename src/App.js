@@ -1,6 +1,6 @@
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import { API } from 'aws-amplify';
+import { API, Storage } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import {
@@ -12,16 +12,26 @@ import { listTodos } from './graphql/queries';
 const initialFormState = { name: '', description: '' };
 
 function App({ signOut }) {
-  const [notes, setNotes] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {
-    fetchNotes();
+    fetchTodo();
   }, []);
 
-  async function fetchNotes() {
+  async function fetchTodo() {
     const apiData = await API.graphql({ query: listTodos });
-    setNotes(apiData.data.listNotes.items);
+    const todosFromAPI = apiData.data.listTodos.items;
+    await Promise.all(
+      todosFromAPI.map(async (note) => {
+        if (note.image) {
+          const image = await Storage.get(note.image);
+          note.image = image;
+        }
+        return note;
+      })
+    );
+    setTodos(apiData.data.listTodos.items);
   }
 
   async function createTodo() {
@@ -30,21 +40,34 @@ function App({ signOut }) {
       query: createTodoMutation,
       variables: { input: formData },
     });
-    setNotes([...notes, formData]);
+    if (formData.image) {
+      const image = await Storage.get(formData.image);
+      formData.image = image;
+    }
+    setTodos([...todos, formData]);
     setFormData(initialFormState);
   }
 
   async function deleteTodo({ id }) {
-    const newNotesArray = notes.filter((note) => note.id !== id);
-    setNotes(newNotesArray);
+    const newTodosArray = todos.filter((note) => note.id !== id);
+    setTodos(newTodosArray);
     await API.graphql({
       query: deleteTodoMutation,
       variables: { input: { id } },
     });
   }
+
+  async function onChange(e) {
+    if (!e.target.files[0]) return;
+    const file = e.target.files[0];
+    setFormData({ ...formData, image: file.name });
+    await Storage.put(file.name, file);
+    fetchTodo();
+  }
+
   return (
     <div className='App'>
-      <h1>My Notes App</h1>
+      <h1>My Todos App</h1>
       <input
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         placeholder='Note name'
@@ -57,13 +80,17 @@ function App({ signOut }) {
         placeholder='Note description'
         value={formData.description}
       />
+      <input type='file' onChange={onChange} />
       <button onClick={createTodo}>Create Note</button>
       <div style={{ marginBottom: 30 }}>
-        {notes.map((note) => (
+        {todos.map((note) => (
           <div key={note.id || note.name}>
             <h2>{note.name}</h2>
             <p>{note.description}</p>
             <button onClick={() => deleteTodo(note)}>Delete note</button>
+            {note.image && (
+              <img src={note.image} style={{ width: 400 }} alt={note.name} />
+            )}
           </div>
         ))}
       </div>
