@@ -97,14 +97,14 @@ function App({ signOut }) {
       <fieldset className='fieldset'>
         <input
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          placeholder='Note name'
+          placeholder='Task title'
           value={formData.name}
         />
         <input
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
-          placeholder='Note description'
+          placeholder='Task description'
           value={formData.description}
         />
         <input type='file' id='file-input' onChange={onChange} />
@@ -127,8 +127,13 @@ function App({ signOut }) {
               <h2>{todo.name}</h2>
               <p>{todo.description}</p>
               <p>
-                Created at {new Date(todo.createdAt).toLocaleDateString()}{' '}
-                {new Date(todo.createdAt).toLocaleTimeString()}
+                Created at{' '}
+                {todo.createdAt
+                  ? new Date(todo.createdAt).toLocaleDateString()
+                  : new Date().toLocaleDateString()}{' '}
+                {todo.createdAt
+                  ? new Date(todo.createdAt).toLocaleTimeString()
+                  : new Date().toLocaleTimeString()}
               </p>
             </div>
             <div className='flex-col'>
