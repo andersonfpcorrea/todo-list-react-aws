@@ -1,7 +1,5 @@
 # _[Todo app](https://master.da3owp9wefdc1.amplifyapp.com/)_
 
-[Screencast from 23-09-2022 04:06:38.webm](https://user-images.githubusercontent.com/92505216/191912415-a9f72d77-64e6-414a-a3dc-d3d1399cc74c.webm)
-
 <details>
 <summary><strong>Leia a descrição do projeto em português 🇧🇷</strong></summary>
 <br />
