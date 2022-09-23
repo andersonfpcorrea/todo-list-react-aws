@@ -8,6 +8,7 @@ import {
   deleteTodo as deleteTodoMutation,
 } from './graphql/mutations';
 import { listTodos } from './graphql/queries';
+import { orderObjByDate } from './helper';
 import Logo from './logo.svg';
 
 const initialFormState = { name: '', description: '' };
@@ -15,6 +16,7 @@ const initialFormState = { name: '', description: '' };
 function App({ signOut }) {
   const [todos, setTodos] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
+  console.log(todos);
 
   useEffect(() => {
     fetchTodo();
@@ -36,7 +38,7 @@ function App({ signOut }) {
           return note;
         })
       );
-      setTodos(apiData.data.listTodos.items);
+      setTodos(orderObjByDate('createdAt', apiData.data.listTodos.items));
     } catch (err) {
       console.error(`Something was wrong: ${err.message}`);
     }
@@ -54,7 +56,7 @@ function App({ signOut }) {
         const image = await Storage.get(formData.image);
         formData.image = image;
       }
-      setTodos([...todos, formData]);
+      setTodos(orderObjByDate('createdAt', [...todos, formData]));
       setFormData(initialFormState);
       document.querySelector('[type="file"]').value = '';
     } catch (err) {
@@ -65,7 +67,7 @@ function App({ signOut }) {
   async function deleteTodo({ id }) {
     try {
       const newTodosArray = todos.filter((note) => note.id !== id);
-      setTodos(newTodosArray);
+      setTodos(orderObjByDate('createdAt', newTodosArray));
       await API.graphql({
         query: deleteTodoMutation,
         variables: { input: { id } },
@@ -119,7 +121,7 @@ function App({ signOut }) {
           justifyContent: 'center',
         }}
       >
-        {todos.map((todo) => (
+        {todos?.map((todo) => (
           <div key={todo.id || todo.name} className='todo-card'>
             <div style={{ textAlign: 'center' }}>
               <h2>{todo.name}</h2>
