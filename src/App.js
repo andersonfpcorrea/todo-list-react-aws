@@ -16,7 +16,7 @@ function App({ signOut }) {
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {
-    fetchTodo();
+    fetchTodo().catch((err) => console.error(err.message));
   }, []);
 
   async function fetchTodo() {
