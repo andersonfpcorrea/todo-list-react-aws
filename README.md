@@ -1,5 +1,7 @@
 # _[Todo app](https://master.da3owp9wefdc1.amplifyapp.com/)_
 
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/92505216/191913272-ef1b2190-52f1-4caf-88e2-692438dd22ea.gif)
+
 <details>
 <summary><strong>Leia a descrição do projeto em português 🇧🇷</strong></summary>
 <br />
