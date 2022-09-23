@@ -1,5 +1,12 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
+  padding: 1rem;
 }
 
 .App-logo {
@@ -35,4 +42,70 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 2rem 1rem;
+  border-radius: 0.4rem;
+  margin: 1rem 0;
+}
+
+input {
+  border-radius: 0.4rem;
+  border: none;
+  width: 100%;
+}
+
+input::placeholder {
+  padding: 0 0.4rem;
+}
+
+.fieldset button {
+  background-color: #61dafb;
+  border-radius: 0.4rem;
+  border: none;
+  color: #282c34;
+  margin-top: 1rem;
+  padding: 0.4rem;
+  transition: all 0.3s;
+}
+
+.fieldset button:hover {
+  background-color: hsl(193, 95%, 58%);
+  color: #282c34;
+  cursor: pointer;
+}
+
+button {
+  padding: 0.4rem;
+}
+
+.sign-out-btn {
+  background: #61dafb;
+  border: none;
+  border-radius: 0.4rem;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.todo-card {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  border: 1px solid white;
+  padding: 1rem;
+}
+
+.todo-img {
+  width: 12rem;
+}
+
+/* Utility */
+.flex-col {
+  display: flex;
+  flex-direction: column;
 }

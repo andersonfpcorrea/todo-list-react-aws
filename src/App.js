@@ -8,12 +8,14 @@ import {
   deleteTodo as deleteTodoMutation,
 } from './graphql/mutations';
 import { listTodos } from './graphql/queries';
+import Logo from './logo.svg';
 
 const initialFormState = { name: '', description: '' };
 
 function App({ signOut }) {
   const [todos, setTodos] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
+  console.log(todos);
 
   useEffect(() => {
     fetchTodo().catch((err) => console.error(err.message));
@@ -50,6 +52,7 @@ function App({ signOut }) {
     }
     setTodos([...todos, formData]);
     setFormData(initialFormState);
+    document.querySelector('[type="file"]').value = '';
   }
 
   async function deleteTodo({ id }) {
@@ -71,35 +74,58 @@ function App({ signOut }) {
   }
 
   return (
-    <div className='App'>
-      <h1>My Todos App</h1>
-      <input
-        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        placeholder='Note name'
-        value={formData.name}
-      />
-      <input
-        onChange={(e) =>
-          setFormData({ ...formData, description: e.target.value })
-        }
-        placeholder='Note description'
-        value={formData.description}
-      />
-      <input type='file' onChange={onChange} />
-      <button onClick={createTodo}>Create Todo</button>
-      <div style={{ marginBottom: 30 }}>
+    <div className='App App-header'>
+      <img src={Logo} alt='react logo' className='App-logo' />
+      <h1 className=''>Full-Stack Todo App</h1>
+      <fieldset className='fieldset'>
+        <input
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          placeholder='Note name'
+          value={formData.name}
+        />
+        <input
+          onChange={(e) =>
+            setFormData({ ...formData, description: e.target.value })
+          }
+          placeholder='Note description'
+          value={formData.description}
+        />
+        <input type='file' id='file-input' onChange={onChange} />
+        <button onClick={createTodo}>Create Todo</button>
+      </fieldset>
+      <div
+        style={{
+          marginBottom: 30,
+          marginTop: 40,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          justifyContent: 'center',
+        }}
+      >
         {todos.map((todo) => (
-          <div key={todo.id || todo.name}>
-            <h2>{todo.name}</h2>
-            <p>{todo.description}</p>
-            {todo.image && (
-              <img src={todo.image} style={{ width: 400 }} alt={todo.name} />
-            )}
-            <button onClick={() => deleteTodo(todo)}>Delete todo</button>
+          <div key={todo.id || todo.name} className='todo-card'>
+            <div style={{ textAlign: 'center' }}>
+              <h2>{todo.name}</h2>
+              <p>{todo.description}</p>
+              <p>
+                Created at {new Date(todo.createdAt).toLocaleDateString()}{' '}
+                {new Date(todo.createdAt).toLocaleTimeString()}
+              </p>
+            </div>
+            <div className='flex-col'>
+              {todo.image && (
+                <img src={todo.image} className='todo-img' alt={todo.name} />
+              )}
+              <button onClick={() => deleteTodo(todo)}>Delete todo</button>
+            </div>
           </div>
         ))}
       </div>
-      <button onClick={signOut}>Sign Out</button>
+      <button onClick={signOut} className='sign-out-btn'>
+        Sign Out
+      </button>
     </div>
   );
 }
