@@ -6,8 +6,6 @@
 
 ## Descrição
 
-<hr>
-
 Este é um app de lista de afazeres (_todo app_) full-stack:
 
 - Há autenticação de usuário, criação de conta com verificação de email, recuperação de senha e validação de dados no formulário de login.
@@ -17,8 +15,6 @@ Este é um app de lista de afazeres (_todo app_) full-stack:
 </br>
 
 ## Arquitetura
-
-<hr>
 
 O frontend do projeto foi desenvolvido em React e hospedado com o serviço _[AWS Amplify](https://aws.amazon.com/amplify/)_
 
@@ -30,16 +26,12 @@ No backend foi criada uma API _[GraphQL](https://graphql.org/)_ com os serviços
 
 ## Setup do projeto
 
-<hr>
-
 - React v.18.2.0
 - AWS Amplify CLI v.10.0.0
 
 <br>
 
 ## Continuous Delivery (CD)
-
-<hr>
 
 - Processo de entrega contínuo (CD) com _[AWS Amplify](https://master.da3owp9wefdc1.amplifyapp.com/)_.
 
@@ -53,8 +45,6 @@ No backend foi criada uma API _[GraphQL](https://graphql.org/)_ com os serviços
 
 ## Description
 
-<hr>
-
 This is a full-stack todo app.
 
 - There is user authentication, creation of new accounts with email verification, password recovery and form data validation;
@@ -64,8 +54,6 @@ This is a full-stack todo app.
 </br>
 
 ## Architecture
-
-<hr>
 
 The frontend was developed with React and deployed with _[AWS Amplify](https://aws.amazon.com/amplify/)_
 
@@ -77,16 +65,12 @@ For the backend it was created a _[GraphQL API](https://graphql.org/)_ with _[AW
 
 ## Project Setup
 
-<hr>
-
 - React v.18.2.0
 - AWS Amplify CLI v.10.0.0
 
 <br>
 
 ## Continuous Delivery (CD)
-
-<hr>
 
 - Continous delivery (CD) with _[AWS Amplify](https://master.da3owp9wefdc1.amplifyapp.com/)_.
 
