@@ -20,7 +20,10 @@ function App({ signOut }) {
   }, []);
 
   async function fetchTodo() {
-    const apiData = await API.graphql({ query: listTodos });
+    const apiData = await API.graphql({
+      query: listTodos,
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
+    });
     const todosFromAPI = apiData.data.listTodos.items;
     await Promise.all(
       todosFromAPI.map(async (note) => {
@@ -83,16 +86,16 @@ function App({ signOut }) {
         value={formData.description}
       />
       <input type='file' onChange={onChange} />
-      <button onClick={createTodo}>Create Note</button>
+      <button onClick={createTodo}>Create Todo</button>
       <div style={{ marginBottom: 30 }}>
-        {todos.map((note) => (
-          <div key={note.id || note.name}>
-            <h2>{note.name}</h2>
-            <p>{note.description}</p>
-            <button onClick={() => deleteTodo(note)}>Delete note</button>
-            {note.image && (
-              <img src={note.image} style={{ width: 400 }} alt={note.name} />
+        {todos.map((todo) => (
+          <div key={todo.id || todo.name}>
+            <h2>{todo.name}</h2>
+            <p>{todo.description}</p>
+            {todo.image && (
+              <img src={todo.image} style={{ width: 400 }} alt={todo.name} />
             )}
+            <button onClick={() => deleteTodo(todo)}>Delete todo</button>
           </div>
         ))}
       </div>
