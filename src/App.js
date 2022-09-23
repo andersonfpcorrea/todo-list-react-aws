@@ -39,6 +39,7 @@ function App({ signOut }) {
     await API.graphql({
       query: createTodoMutation,
       variables: { input: formData },
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
     });
     if (formData.image) {
       const image = await Storage.get(formData.image);
@@ -54,6 +55,7 @@ function App({ signOut }) {
     await API.graphql({
       query: deleteTodoMutation,
       variables: { input: { id } },
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
     });
   }
 
