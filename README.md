@@ -20,7 +20,7 @@ O frontend do projeto foi desenvolvido em React e hospedado com o serviço _[AWS
 
 A autenticação de usuário foi feita através da _[Amazon Cognito](https://aws.amazon.com/cognito/)_ e de _libraries_ da AWS Amplify.
 
-No backend foi criada uma API _[GraphQL](https://graphql.org/)_ com os serviços _[AWL AppSync](https://aws.amazon.com/pt/appsync/)_ e _[Amazon S3](https://aws.amazon.com/pt/s3/)_ num banco de dados NoSQL (_[Amazon DynamoDB](https://aws.amazon.com/pt/dynamodb/)_).
+No backend foi criada uma API _[GraphQL](https://graphql.org/)_ com os serviços _[AWS AppSync](https://aws.amazon.com/pt/appsync/)_ e _[Amazon S3](https://aws.amazon.com/pt/s3/)_ num banco de dados NoSQL (_[Amazon DynamoDB](https://aws.amazon.com/pt/dynamodb/)_).
 
 </br>
 
@@ -59,7 +59,7 @@ The frontend was developed with React and deployed with _[AWS Amplify](https://a
 
 User authentication was carried out with AWS Amplify libraries and _[Amazon Cognito](https://aws.amazon.com/cognito/)_.
 
-For the backend it was created a _[GraphQL API](https://graphql.org/)_ with _[AWL AppSync](https://aws.amazon.com/pt/appsync/)_ and _[Amazon S3](https://aws.amazon.com/pt/s3/)_ services, using a NoSQL database (_[Amazon DynamoDB](https://aws.amazon.com/pt/dynamodb/)_).
+For the backend it was created a _[GraphQL API](https://graphql.org/)_ with _[AWS AppSync](https://aws.amazon.com/pt/appsync/)_ and _[Amazon S3](https://aws.amazon.com/pt/s3/)_ services, using a NoSQL database (_[Amazon DynamoDB](https://aws.amazon.com/pt/dynamodb/)_).
 
 </br>
 
